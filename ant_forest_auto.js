@@ -191,14 +191,14 @@ function enterOthers(){
         if(myEnergyTime()){
             return false;
         }
-        swipe(screen_width*0.5,screen_height*0.7,screen_width*0.5,screen_height*0.1,500);
+        swipe(screen_width*0.5,screen_height*0.2,screen_width*0.5,screen_height*0.1,500);
         sleep(300);
         ePoint=getHasEnergyfriend(1);
         i++;
 
 
         //如果连续15次都未检测到可收集好友,无论如何停止查找 
-        if(i>15){
+        if(i>30){
             toastLog("程序可能出错,连续"+i+"次未检测到可收集好友");
             return false;
         }
