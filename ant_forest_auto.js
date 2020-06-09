@@ -329,19 +329,16 @@ function openAlipay(){
     
     launchApp("支付宝");
     toastLog("等待支付宝启动");
-    var i=0;
-    while (!textEndsWith("扫一扫").exists() && !descEndsWith("扫一扫").exists() && i<=5){
-        sleep(1000);
-        back()
-        i++;
+    var i;
+    for (i = 0; i <= 5; i++) {
+        if (textEndsWith("首页").exists() || descEndsWith("首页").exists()) {
+            clickByTextDesc("首页", 0);
+            break
+        } else {
+            back()
+        }
     }
     toastLog("第"+i+"次尝试进入支付宝主页");
-    if(i>=5){
-        toastLog("没有找到支付宝首页");
-        sleep(1000);
-        clickByTextDesc("首页",0);
-        return false;
-    }
     return true;
 }
     
