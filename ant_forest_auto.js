@@ -331,7 +331,7 @@ function openAlipay(){
     toastLog("等待支付宝启动");
     var i=0;
     while (!textEndsWith("扫一扫").exists() && !descEndsWith("扫一扫").exists() && i<=5){
-        sleep(200);
+        sleep(1000);
         back()
         i++;
     }
