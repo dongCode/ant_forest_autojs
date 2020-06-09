@@ -1,5 +1,5 @@
-# alipay_autojs 最最最简单的蚂蚁森林自动收能量脚本 
-支付宝蚂蚁森林自动收取能量，蚂蚁庄园自动喂鸡，支持MIUI
+# alipay_autojs 蚂蚁森林自动收能量脚本 
+支付宝蚂蚁森林自动收取能量，支持MIUI
 
 auto.js是一个支持无障碍服务的Android平台上的JavaScript IDE。通过调用无障碍服务可以实现各种人与手机的交互模拟，进而实现各种自动化操作。
 
@@ -9,8 +9,6 @@ auto.js是一个支持无障碍服务的Android平台上的JavaScript IDE。通�
 4. 支持自动收集支付宝会员积分，在收集完能量后进行
 5. 按"音量-"键停止脚本
 
-手机横向分辨率是1080应该都适用(screen_width=1080)。
-纵向分辨率需自行修改screen_height=xxx(程序中默认screen_height=2340)。
 
 
 参考：
