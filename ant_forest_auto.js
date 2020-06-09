@@ -198,7 +198,7 @@ function enterOthers(){
 
 
         //如果连续15次都未检测到可收集好友,无论如何停止查找 
-        if(i>30){
+        if(i>50){
             toastLog("程序可能出错,连续"+i+"次未检测到可收集好友");
             return false;
         }
@@ -325,23 +325,10 @@ function myEnergyTime(){
 }
 
 function openAlipay(){
-    //launchApp("Alipay");
-    
     launchApp("支付宝");
     toastLog("等待支付宝启动");
-    //sleep(3000);
-    var i=0;
-    while (!textEndsWith("扫一扫").exists() && !descEndsWith("扫一扫").exists() && i<=5){
-        sleep(2000);
-        i++;
-    }
-    toastLog("第"+i+"次尝试进入支付宝主页");
-    if(i>=5){
-        toastLog("没有找到支付宝首页");
-        sleep(1000);
-        clickByTextDesc("首页",0);
-        return false;
-    }
+    sleep(500)
+    clickByTextDesc("首页",0);
     return true;
 }
     
