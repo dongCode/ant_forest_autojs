@@ -1,8 +1,8 @@
-var morningTime = "07:18";//自己运动能量生成时间
-var startTime = "07:00";
-var endTime = "7:35";
-var screen_width = 1080;  //设置屏幕的宽度，像素值
-var screen_height = 2340; //设置屏幕的高度，像素值
+const morningTime = "07:18";//自己运动能量生成时间
+const startTime = "07:00";
+const endTime = "7:35";
+const screen_width = device.width;  //设置屏幕的宽度，像素值
+const screen_height = device.height; //设置屏幕的高度，像素值
 
 
 unlock();
@@ -30,10 +30,6 @@ function mainEntrence(){
     do{
         //打开支付宝
         openAlipay();
-        //蚂蚁庄园
-        if(!checkTime()){
-            //enterAntFarm();
-         }
         //进入蚂蚁森林主页,收集自己的能量
         enterMyMainPage();
         //进入排行榜
@@ -99,14 +95,11 @@ function unlock(){
 //获取权限和设置参数
 function prepareThings(){
     setScreenMetrics(screen_width, screen_height);
-    //toastLog("test1");
-    //请求截图
     if(!requestScreenCapture()){
         toastLog("请求截图失败,脚本退出");
         exit();
     }
     sleep(3000);
-    //toastLog("test2");
 }
 
 
@@ -129,28 +122,13 @@ function getCaptureImg(){
 function enterMyMainPage(){
     //五次尝试蚂蚁森林入
     var i=0;
-    swipe(screen_width*0.5,screen_height*0.5,screen_width*0.5,screen_height*0.25,500);
     sleep(500);
-    swipe(screen_width*0.5,screen_height*0.25,screen_width*0.5,screen_height*0.5,500);
-    while (!textEndsWith("蚂蚁森林").exists() && !descEndsWith("蚂蚁森林").exists() && i<=5){
-        sleep(1000);
-        i++;   
-    }  
-    if(i>=5){
-        toastLog("没有找到蚂蚁森林入口，尝试中");
-        clickByTextDesc("首页",0);
-        sleep(2000);
-        swipe(screen_width*0.5,screen_height*0.3,screen_width*0.5,screen_height*0.7,1000);
-        sleep(2000);
-        swipe(screen_width*0.5,screen_height*0.3,screen_width*0.5,screen_height*0.7,1000);
-        sleep(2000);
-    }
-    clickByTextDesc("蚂蚁森林",0);
+    click("蚂蚁森林");
     
     //等待进入自己的主页,10次尝试
     sleep(3000);
     i=0;
-    while (!textEndsWith("背包").exists() && !descEndsWith("背包").exists() && i<=10){
+    while (!textEndsWith("背包").exists() && !descEndsWith("地图").exists() && i<=10){
         sleep(1000);
         i++;
     }
@@ -161,11 +139,7 @@ function enterMyMainPage(){
     }
     
     //收自己能量
-    //clickByTextDesc("克",0);
-    for(var row=screen_height*0.256;row<screen_height*0.376;row+=80)
-        for(var col=screen_width*0.185;col<screen_width*0.815;col+=80){
-            click(col,row);
-            }
+    clickByTextDesc("克",0);
     toastLog("自己能量收集完成");
     sleep(100);
     return true;
@@ -180,7 +154,7 @@ function enterRank(){
     swipe(screen_width*0.5,screen_height*0.8,screen_width*0.5,screen_height*0.1,500);
     toastLog("查看更多好友");
     sleep(500);
-    clickByTextDesc("查看更多好友",0);
+    click("查看更多好友");
        
     //等待排行榜主页出现
     sleep(3000);
@@ -190,13 +164,11 @@ function enterRank(){
 //从排行榜获取可收集好友的点击位置
 function  getHasEnergyfriend(type) {
     var img = getCaptureImg();
-    //getCaptureImg();
-    //var img = images.read("/storage/emulated/0/DCIM/Screenshots/2.png");
     var p=null;
     if(type==1){
         // 区分倒计时和可收取能量的小手
         p = images.findMultiColors(img, "#ffffff",[[0, -35, "#1da06d"],[0, 23, "#1da06d"]], {
-            region: [1043,200 , 1, screen_height-300]
+            region: [1045,200 , 1, screen_height-300]
         });
     }
     if(p!=null){
@@ -210,7 +182,6 @@ function  getHasEnergyfriend(type) {
 
 //在排行榜页面,循环查找可收集好友
 function enterOthers(){
-    sleep(1000);
     var i=1;
     var ePoint=getHasEnergyfriend(1);
     
@@ -221,7 +192,7 @@ function enterOthers(){
             return false;
         }
         swipe(screen_width*0.5,screen_height*0.7,screen_width*0.5,screen_height*0.1,500);
-        sleep(1000);
+        sleep(300);
         ePoint=getHasEnergyfriend(1);
         i++;
 
@@ -351,33 +322,6 @@ function myEnergyTime(){
     }else{
         return false;
     }   
-}
-
-function enterAntFarm(){
-    var i=0;
-    sleep(2000);
-    while (!textEndsWith("蚂蚁庄园").exists() &&!descEndsWith("蚂蚁庄园").exists() && i<=5){
-        sleep(1000);
-        i++;   
-    }
-    if(i>=5){
-        return false;
-    }
-        
-    clickByTextDesc("蚂蚁庄园",0);
-    sleep(7000);
-    //captureScreen("/storage/emulated/0/DCIM/Screenshots/2_1.png");
-    //exit();
-    click(931,2150);
-    sleep(2000);
-    click(340,1420);
-    sleep(1000);
-    click(340,1900);sleep(1000);click(230,1600);sleep(1000);
-    click(930,1900);sleep(1000);click(670,1600);sleep(1000);
-    //captureScreen("/storage/emulated/0/DCIM/Screenshots/2_2.png");
-    back();
-    sleep(2000);
-    return true;
 }
 
 function openAlipay(){
