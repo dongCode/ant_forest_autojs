@@ -26,21 +26,18 @@ mainEntrence();
 function mainEntrence() {
   //前置操作
   prepareThings();
-  do {
-    //打开支付宝
-    openAlipay();
-    //进入蚂蚁森林主页,收集自己的能量
-    enterMyMainPage();
+  //打开支付宝
+  openAlipay();
+  //进入蚂蚁森林主页,收集自己的能量
+  enterMyMainPage();
     //进入排行榜
-    if (enterRank()) {
-      //进入好友主页，收好友能量
-      enterOthers();
-    }
-    get_alipay_points();
+  if (enterRank()) {
+    //进入好友主页，收好友能量
+    enterOthers();
+  }
+  get_alipay_points();
     //结束后返回主页面
-    whenComplete();
-  } while (checkTime());
-
+  whenComplete();
   exit();
 }
 
