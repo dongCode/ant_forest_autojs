@@ -227,7 +227,7 @@ function enterOthers() {
     //如果连续50次都未检测到可收集好友,无论如何停止查找
     if (i > 50 || textEndsWith("没有更多了").exists()) {
       toastLog("程序可能出错,连续" + i + "次未检测到可收集好友");
-      return false;
+      return true;
     }
   }
 
@@ -247,7 +247,7 @@ function enterOthers() {
   toastLog("第" + i + "次尝试进入好友主页");
   if (i >= 10) {
     toastLog("进入好友能量主页失败");
-    return false;
+    return true;
   }
 
   //收能量
