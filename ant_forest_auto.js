@@ -28,6 +28,7 @@ function mainEntrence() {
   prepareThings();
   //打开支付宝
   openAlipay();
+
   //进入蚂蚁森林主页,收集自己的能量
   enterMyMainPage();
     //进入排行榜
@@ -35,7 +36,6 @@ function mainEntrence() {
     //进入好友主页，收好友能量
     enterOthers();
   }
-  get_alipay_points();
     //结束后返回主页面
   whenComplete();
   exit();
@@ -367,6 +367,7 @@ function openAlipay() {
   launchApp("支付宝");
   toastLog("等待支付宝启动");
   sleep(1000);
+  get_alipay_points();
   clickByTextDesc("首页", 0);
   return true;
 }
