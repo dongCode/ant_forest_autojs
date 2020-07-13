@@ -228,7 +228,7 @@ function enterOthers() {
     i++;
 
     //如果连续50次都未检测到可收集好友,无论如何停止查找
-    if (i > 50 || textEndsWith("没有更多了")) {
+    if (i > 50 || textEndsWith("没有更多了").exit()) {
       toastLog("程序可能出错,连续" + i + "次未检测到可收集好友");
       return false;
     }
