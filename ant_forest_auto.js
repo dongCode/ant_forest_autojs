@@ -168,9 +168,7 @@ function  getHasEnergyfriend(type) {
     var p=null;
     if(type==1){
         // 区分倒计时和可收取能量的小手
-        p = images.findMultiColors(img, "#ffffff",[[0, -35, "#1da06d"],[0, 23, "#1da06d"]], {
-            region: [1045,200 , 1, screen_height-300]
-        });
+        p = images.findColor(img, "#1da06d");
     }
     if(p!=null){
         toastLog("找到好友");
@@ -199,6 +197,7 @@ function enterOthers(){
 
 
         //如果连续50次都未检测到可收集好友,无论如何停止查找 
+        toastLog(text('没有更多了').exists())
         if(i>50 || text('没有更多了').exists()){
             toastLog("程序可能出错,连续"+i+"次未检测到可收集好友");
             return false;
